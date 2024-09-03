@@ -1,4 +1,5 @@
 // Logic for handling swipe based navigation within the item pane.
+let screenWidth = window.innerWidth;
 let touchStartX = 0
 let touchEndX = 0
 
@@ -14,10 +15,14 @@ item_element.addEventListener('touchend', function (event) {
     handleSwipe();
 })
 
+window.addEventListener('resize', function (event) {
+    screenWidth = window.innerWidth;
+})
+
 // Helper functions are from key.js.
 // Threshold of 100 should avoid accidental changes when scrolling up and down.
 function handleSwipe() {
-    let threshold = 150;
+    let threshold = Math.floor(screenWidth * .2);
     if (touchEndX < touchStartX - threshold) {
         // Swiped left
         helperFunctions.navigateToItem(+1);
