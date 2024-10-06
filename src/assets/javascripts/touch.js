@@ -34,6 +34,10 @@ function handleSwipe() {
         if (touchEndX < touchStartX - threshold) {
             // Swiped left
             helperFunctions.navigateToItem(+1);
+            // Load additional feed items if more items are available
+            if (vm.itemsHasMore && vm.items[vm.items.length - 1].id === vm.itemSelected) {
+                vm.refreshItems(true);
+            }
         } else if (touchEndX > touchStartX + threshold) {
             // Swiped right
             helperFunctions.navigateToItem(-1);
